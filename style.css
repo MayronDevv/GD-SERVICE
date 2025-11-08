@@ -1659,7 +1659,7 @@ nav a.current::after {
 
   /* === 2. HERO : ESPACE RÉDUIT === */
   .hero {
-    margin-top: 30px !important;
+    margin-top: 50px !important;
     margin-bottom: 20px !important;
     padding: 75px 10px 40px !important;
     min-height: auto !important;
