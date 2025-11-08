@@ -1346,7 +1346,10 @@ nav a.current::after {
   .hero-grid { gap: 25px; }
   .hero-text h2, .carousel-title { font-size: 1.6rem !important; }
   .hero-text p, .carousel-subtitle { font-size: 0.9rem; }
-  .hero-features { gap: 10px; justify-content: center; }
+  .hero-features {
+     gap: 10px; 
+     justify-content: center;
+     margin-bottom: 50px; }
   .hero-features div { padding: 8px 12px; font-size: 0.8rem; }
 
   /* CARROUSEL ACCUEIL */
@@ -1541,5 +1544,207 @@ nav a.current::after {
   }
   * {
     -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* ===== FIX < 550px - ACCUEIL RESPONSIVE TOTAL ===== */
+@media (max-width: 550px) {
+  .hero {
+    padding: 85px 12px 40px !important;
+    min-height: 100vh;
+  }
+  .hero-content {
+    padding: 0 8px !important;
+    margin-top: 0 !important;
+  }
+  .hero-grid {
+    gap: 20px !important;
+    text-align: center;
+  }
+
+  /* TEXTE */
+  .hero-text h2, .carousel-title {
+    font-size: 1.45rem !important;
+    margin-bottom: 10px !important;
+    line-height: 1.3;
+  }
+  .hero-text p, .carousel-subtitle {
+    font-size: 0.88rem !important;
+    line-height: 1.5;
+    margin-bottom: 16px !important;
+  }
+
+  /* BOUTONS */
+  .hero-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+  }
+  .btn {
+    width: 100% !important;
+    max-width: 260px !important;
+    padding: 12px 18px !important;
+    font-size: 0.95rem !important;
+    margin: 0 auto !important;
+    display: block;
+  }
+
+  /* CARROUSEL */
+  .hero-carousel {
+    width: 100%;
+    padding: 0 5px;
+  }
+  .carousel {
+    max-width: 100% !important;
+    border-radius: 12px !important;
+    border: 2px solid var(--orange) !important;
+  }
+  .carousel-inner img {
+    height: 160px !important;
+    min-height: 160px !important;
+    object-fit: cover;
+  }
+  .carousel-dots {
+    margin-top: 8px !important;
+  }
+  .dot {
+    width: 8px !important;
+    height: 8px !important;
+    margin: 0 3px !important;
+  }
+
+  /* ATOUTS */
+  .hero-features {
+    gap: 8px !important;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .hero-features div {
+    padding: 7px 11px !important;
+    font-size: 0.78rem !important;
+    flex: 1 1 48% !important;
+    text-align: center;
+  }
+  .hero-features span {
+    padding-left: 18px !important;
+  }
+  .hero-features span::before {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* FIX SCROLL & ZOOM MOBILE */
+@media (max-width: 550px) {
+  * {
+    -webkit-overflow-scrolling: touch;
+  }
+  .hero, .hero-content, .hero-grid, .carousel {
+    overflow-x: hidden !important;
+  }
+}
+/* ===== FIX FINAL < 550px : ACCUEIL 100% VISIBLE & RESPONSIVE ===== */
+@media (max-width: 550px) {
+  /* === 1. HEADER PLUS COMPACT === */
+  header {
+    padding: 8px 10px !important;
+  }
+  .logo-container img {
+    height: 36px !important;
+  }
+  .logo-container h1 {
+    font-size: 0.9rem !important;
+  }
+
+  /* === 2. HERO : ESPACE RÉDUIT === */
+  .hero {
+    margin-top: 30px !important;
+    margin-bottom: 20px !important;
+    padding: 75px 10px 40px !important;
+    min-height: auto !important;
+  }
+  .hero-content {
+    padding: 0 6px !important;
+    margin-top: 0 !important;
+  }
+
+  /* === 3. GRILLE EN 1 COLONNE === */
+  .hero-grid {
+    grid-template-columns: 1fr !important;
+    gap: 18px !important;
+    text-align: center;
+  }
+
+  /* === 4. TIMELINE : CACHÉE SUR PETIT ÉCRAN === */
+  .timeline-container {
+    display: none !important;
+  }
+
+  /* === 5. TEXTES RÉDUITS === */
+  .hero-left h2,
+  .about-title,
+  .carousel-title {
+    font-size: 1.3rem !important;
+    margin: 12px 0 6px !important;
+  }
+  .hero-left p,
+  .about-text,
+  .carousel-subtitle {
+    font-size: 0.85rem !important;
+    line-height: 1.5;
+    margin-bottom: 12px !important;
+  }
+
+  /* === 6. CARROUSEL PARFAIT === */
+  .carousel {
+    max-width: 100% !important;
+    border-radius: 10px !important;
+    border: 2px solid var(--orange) !important;
+    height: 150px !important;
+  }
+  .carousel-inner img {
+    height: 150px !important;
+    min-height: 150px !important;
+    object-fit: cover;
+  }
+  .carousel-dots {
+    margin-top: 6px !important;
+  }
+  .dot {
+    width: 7px !important;
+    height: 7px !important;
+    margin: 0 3px !important;
+  }
+
+  /* === 7. 3 BOUTONS : VISIBLES & BIEN ESPACÉS === */
+  .hero-features {
+    gap: 7px !important;
+    justify-content: center !important;
+    flex-wrap: wrap !important;
+    margin-top: 14px !important;
+  }
+  .hero-features div {
+    padding: 6px 10px !important;
+    font-size: 0.75rem !important;
+    flex: 1 1 45% !important;
+    min-width: 120px;
+    text-align: center;
+    border-radius: 8px !important;
+  }
+  .hero-features span {
+    padding-left: 0 !important;
+  }
+  .hero-features span::before {
+    content: none !important;
+  }
+
+  /* === 8. SCROLL & ZOOM FIX === */
+  * {
+    -webkit-overflow-scrolling: touch;
+    -webkit-text-size-adjust: none;
+  }
+  .hero, .hero-content, .hero-grid, .carousel {
+    overflow-x: hidden !important;
   }
 }
