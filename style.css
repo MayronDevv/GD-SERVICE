@@ -1748,3 +1748,19 @@ nav a.current::after {
     overflow-x: hidden !important;
   }
 }
+
+/* ===== LOGO CLIQUABLE (SANS CASSER LE DESIGN) ===== */
+.logo-container a {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  line-height: 0;
+}
+
+.logo-container a:hover {
+  transform: scale(1.08);
+}
+
+.logo-container a img {
+  display: block;
+  pointer-events: auto;
+}
