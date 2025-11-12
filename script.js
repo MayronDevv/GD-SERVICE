@@ -82,7 +82,7 @@ if (timelineContainer) {
   setTimeout(() => document.querySelector('.timeline-line')?.classList.add('filled'), 1600);
 }
 
-// ===== MODAL + CONFETTIS DE MALADE =====
+// ===== MODAL =====
 document.addEventListener('DOMContentLoaded', () => {
   const contactNav = document.getElementById('contactNav');
   const modal = document.getElementById('contactModal');
@@ -108,62 +108,152 @@ document.addEventListener('DOMContentLoaded', () => {
   closeBtn?.addEventListener('click', closeModal);
   window.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
 
-  // ENVOI MESSAGE + CONFETTIS
-  if (sendBtn) {
-    sendBtn.addEventListener('click', (e) => {
-      e.preventDefault();
-      if (sendBtn.disabled) return;
-      sendBtn.disabled = true;
+// ENVOI MESSAGE - VERSION PROFESSIONNELLE + VALIDATION
+// Récupération des champs
+const nameInput = document.querySelector('#contactModal input[type="text"]');
+const emailInput = document.querySelector('#contactModal input[type="email"]');
+const messageInput = document.querySelector('#contactModal textarea');
 
-      btnText.style.display = 'none';
-      successText.style.display = 'inline';
-      sendBtn.style.background = '#00ba7c';
-      sendBtn.style.boxShadow = '0 0 30px rgba(0,186,124,0.8)';
+if (sendBtn) {
+  sendBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (sendBtn.disabled) return;
 
-      // CONFETTIS EXPLOSION
-      const confettiContainer = document.createElement('div');
-      Object.assign(confettiContainer.style, {
-        position: 'fixed', top: '0', left: '0', width: '100%', height: '100%',
-        pointerEvents: 'none', zIndex: '9999'
-      });
-      document.body.appendChild(confettiContainer);
+    // Réinitialiser les erreurs
+    clearErrors();
 
-      for (let i = 0; i < 90; i++) {
-        const c = document.createElement('div');
-        Object.assign(c.style, {
-          position: 'absolute',
-          width: '12px', height: '12px',
-          background: ['#f47c1f', '#ff9a3d', '#00ba7c', '#ffffff'][Math.floor(Math.random() * 4)],
-          left: Math.random() * 100 + 'vw',
-          top: '-15px',
-          borderRadius: Math.random() > 0.5 ? '50%' : '0',
-          transform: `rotate(${Math.random() * 360}deg)`
-        });
-        confettiContainer.appendChild(c);
+    // Récupérer les valeurs
+    const name = nameInput.value.trim();
+    const email = emailInput.value.trim();
+    const message = messageInput.value.trim();
 
-        c.animate([
-          { transform: 'translateY(0) rotate(0deg)', opacity: 1 },
-          { transform: `translateY(100vh) rotate(${Math.random() * 720}deg)`, opacity: 0 }
-        ], {
-          duration: 2200 + Math.random() * 1800,
-          easing: 'cubic-bezier(0.1, 0.1, 0.2, 1)',
-          delay: Math.random() * 400
-        }).onfinish = () => c.remove();
-      }
+    // === VALIDATIONS ===
+    let hasError = false;
 
-      // Fermeture auto après explosion
+    // 1. Nom requis
+    if (!name) {
+      showError(nameInput, 'Le nom est requis.');
+      hasError = true;
+    }
+
+    // 2. Email valide (contient @ et . après @)
+    if (!email || !isValidEmail(email)) {
+      showError(emailInput, 'Email invalide (ex: contact@exemple.com)');
+      hasError = true;
+    }
+
+    // 3. Message > 10 caractères
+    if (!message || message.length <= 10) {
+      showError(messageInput, 'Message trop court (minimum 11 caractères).');
+      hasError = true;
+    }
+
+    // Si erreur → stop
+    if (hasError) {
+      sendBtn.disabled = false;
+      return;
+    }
+
+    // === ENVOI VALIDE ===
+    sendBtn.disabled = true;
+    btnText.style.opacity = '0';
+    successText.style.display = 'none';
+
+    // Ajouter le loader
+    const loader = document.createElement('span');
+    loader.className = 'btn-loader';
+    loader.innerHTML = `
+      <svg width="20" height="20" viewBox="0 0 38 38" stroke="#ff8c2a">
+        <g fill="none" fill-rule="evenodd">
+          <g transform="translate(1 1)" stroke-width="2">
+            <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+            <path d="M36 18c0-9.94-8.06-18-18-18">
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 18 18"
+                to="360 18 18"
+                dur="1s"
+                repeatCount="indefinite"/>
+            </path>
+          </g>
+        </g>
+      </svg>
+    `;
+    sendBtn.appendChild(loader);
+
+    // === SIMULATION D'ENVOI (remplace par fetch plus tard) ===
+    setTimeout(() => {
+      loader.remove();
+
+      // Succès
+      successText.textContent = 'Envoyé avec succès !';
+      successText.style.color = '#ff8c2a';
+      sendBtn.classList.add('success');
+      successText.style.display = 'flex';
+      successText.style.opacity = '1';
+      sendBtn.style.background = '#fff';
+      sendBtn.style.boxShadow = '0 0 20px #ff8c2a';
+      
+
+      // Fermeture auto
       setTimeout(() => {
         modal.classList.remove('active');
         setTimeout(() => {
           modal.style.display = 'none';
-          document.body.removeChild(confettiContainer);
-          sendBtn.disabled = false;
-          btnText.style.display = 'inline';
-          successText.style.display = 'none';
-          sendBtn.style.background = '';
-          sendBtn.style.boxShadow = '';
+          resetForm();
         }, 500);
-      }, 2500);
-    });
-  }
+      }, 2000);
+    }, 1500);
+  });
+}
+
+// === FONCTIONS UTILITAIRES ===
+
+// Validation email stricte
+function isValidEmail(email) {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return regex.test(email);
+}
+
+// Afficher erreur sous le champ
+function showError(input, message) {
+  // Supprimer ancienne erreur
+  const existingError = input.parentNode.querySelector('.error-msg');
+  if (existingError) existingError.remove();
+
+  const error = document.createElement('div');
+  error.className = 'error-msg';
+  error.style.color = '#e74c3c';
+  error.style.fontSize = '12px';
+  error.style.marginTop = '4px';
+  error.textContent = message;
+
+  input.parentNode.appendChild(error);
+  input.style.borderColor = '#e74c3c';
+}
+
+// Nettoyer toutes les erreurs
+function clearErrors() {
+  document.querySelectorAll('.error-msg').forEach(el => el.remove());
+  document.querySelectorAll('#contactModal input, #contactModal textarea').forEach(input => {
+    input.style.borderColor = '';
+  });
+}
+
+// Réinitialiser le formulaire
+function resetForm() {
+  nameInput.value = '';
+  emailInput.value = '';
+  messageInput.value = '';
+  sendBtn.disabled = false;
+  sendBtn.classList.remove('success');
+  btnText.style.opacity = '1';
+  successText.style.display = 'none';
+  successText.style.opacity = '0';
+  sendBtn.style.background = '';
+  sendBtn.style.boxShadow = '';
+  successText.textContent = '';
+  clearErrors();
+}
 });
