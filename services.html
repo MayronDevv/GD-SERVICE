@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nos Services - GD.SERVICE</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="./images/Gys domont.jpg" alt="Logo GD Service">
+      </a>
+      <h1>GD.SERVICE</h1>
+    </div>
+
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="services.html" class="current">Nos services</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="#" id="contactNav">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="background">
+    <div id="shooting-stars"></div>
+  </div>
+
+  <section class="hero-services">
+    <div class="hero-content">
+      <h2>Nos Services</h2>
+      <p>Des solutions complètes, rapides et professionnelles pour tous vos travaux extérieurs.</p>
+    </div>
+  </section>
+
+  <section class="services-detailed">
+    <div class="container">
+
+      <div class="service-block">
+        <div class="service-icon">Démolition</div>
+        <h3>Démolition</h3>
+        <p><strong>Intervention sécurisée et rapide</strong> pour tous types de structures : murs porteurs, dalles béton, cloisons, abris de jardin, hangars légers.</p>
+        <ul>
+          <li>Évaluation préalable du chantier</li>
+          <li>Protection des zones adjacentes</li>
+          <li>Évacuation immédiate des gravats</li>
+          <li>Respect des normes de sécurité</li>
+        </ul>
+        <p class="highlight">Idéal pour rénovation, extension ou démolition totale.</p>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">Terrasse</div>
+        <h3>Création de terrasses & allées</h3>
+        <p><strong>Réalisation sur mesure</strong> de terrasses en bois exotique, composite, béton décoratif ou pavés. Allées piétonnes ou carrossables.</p>
+        <ul>
+          <li>Étude du terrain et drainage</li>
+          <li>Fondation stable (dalle béton ou plots)</li>
+          <li>Pose soignée, finitions impeccables</li>
+          <li>Adapté aux pentes et contraintes</li>
+        </ul>
+        <p class="highlight">Transformez votre extérieur en espace de vie.</p>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">Pavé</div>
+        <h3>Pose de pavés</h3>
+        <p><strong>Pavage durable et esthétique</strong> avec pavés autobloquants, dalles en pierre naturelle ou béton imitation bois/pierre.</p>
+        <ul>
+          <li>Préparation du sol (terrassement, géotextile)</li>
+          <li>Pose sur lit de sable ou mortier</li>
+          <li>Jointoiement professionnel</li>
+          <li>Entretien facile, anti-mousse</li>
+        </ul>
+        <p class="highlight">Pour allées, cours, parkings ou contours de piscine.</p>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">Tranchée</div>
+        <h3>Tranchées & évacuation</h3>
+        <p><strong>Ouverture précise de tranchées</strong> pour réseaux d’eau, électricité, assainissement, fibre optique ou drainage.</p>
+        <ul>
+          <li>Repérage des réseaux existants (DICT)</li>
+          <li>Creusement mécanique ou manuel</li>
+          <li>Évacuation des terres en benne</li>
+          <li>Remblaiement et compactage</li>
+        </ul>
+        <p class="highlight">Intervention propre, sans dégradation du terrain.</p>
+      </div>
+
+      <div class="service-block">
+        <div class="service-icon">Benne</div>
+        <h3>Location de bennes à déchets</h3>
+        <p><strong>Bennes adaptées à tous vos chantiers</strong> : gravats, terre, DIB, encombrants, végétaux.</p>
+        <ul>
+          <li>Bennes de <strong>3 à 30 m³</strong></li>
+          <li>Livraison sous 24h dans un rayon de 50 km</li>
+          <li>Enlèvement sous 48h après appel</li>
+          <li>Tri et recyclage en centre agréé</li>
+        </ul>
+        <p class="highlight">Solution propre, rapide et éco-responsable.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close">x</span>
+      <h2>Contactez-nous</h2>
+      <form>
+        <label>Nom :</label>
+        <input type="text" placeholder="Votre nom" required>
+        <label>Email :</label>
+        <input type="email" placeholder="Votre email" required>
+        <label>Message :</label>
+        <textarea placeholder="Votre message..." required></textarea>
+        <button type="submit" class="btn">Envoyer</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p><a href="index.html" style="color:var(--orange)">Retour à l'accueil</a> | © 2025 GD.SERVICE - Tous droits réservés | Tel : 06.44.26.96.78</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>

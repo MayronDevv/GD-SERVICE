@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GD.SERVICE - Terrassement & Location de Bennes</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo-container">
+      <a href="index.html">
+        <img src="./images/Gys domont.jpg" alt="Logo GD Service">
+      </a>
+      <h1>GD.SERVICE</h1>
+    </div>
+
+    <div class="burger" id="burger">
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+
+    <nav id="nav-menu">
+      <ul>
+        <li><a href="index.html" class="current">Accueil</a></li>
+        <li><a href="services.html">Nos services</a></li>
+        <li><a href="galerie.html">Galerie</a></li>
+        <li><a href="#" id="contactNav">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="background">
+    <div id="shooting-stars"></div>
+  </div>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-grid">
+        
+        <!-- GAUCHE : TIMELINE + PRÉSENTATION + À PROPOS -->
+        <div class="hero-left">
+
+          <!-- TIMELINE -->
+          <div class="timeline-container">
+            <div class="timeline">
+              <div class="timeline-step">
+                <div class="step-circle">1</div>
+                <div class="step-label">Contact</div>
+              </div>
+              <div class="timeline-line"></div>
+              <div class="timeline-step">
+                <div class="step-circle">2</div>
+                <div class="step-label">Devis</div>
+              </div>
+              <div class="timeline-line"></div>
+              <div class="timeline-step">
+                <div class="step-circle">3</div>
+                <div class="step-label">Chantier</div>
+              </div>
+              <div class="timeline-line"></div>
+              <div class="timeline-step">
+                <div class="step-circle">4</div>
+                <div class="step-label">Fini</div>
+              </div>
+            </div>
+          </div>
+
+          <h2>Présentation</h2>
+          <p>
+            Entreprise dirigée par <strong>Monsieur DOMONT Gys</strong>, GD.SERVICE met à votre disposition son savoir-faire et ses équipements pour tous vos travaux extérieurs. 
+            Nous intervenons rapidement avec professionnalisme et efficacité sur vos chantiers de terrassement, démolition ou évacuation.
+          </p>
+
+          <h2 class="about-title">À propos</h2>
+          <p class="about-text">
+            GD.SERVICE est une entreprise spécialisée dans les travaux de terrassement, démolition et location de bennes. 
+            Basée à Juranville, nous intervenons dans un rayon de 50 km avec réactivité et professionnalisme.
+          </p>
+        </div>
+
+        <!-- DROITE -->
+        <div class="hero-right">
+          <h2 class="carousel-title">
+            <span>• Terrassement    <small class="carousel-subtitle">Fondations • Nivellement • Tranchées</small></span>
+            <span>• Démolition      <small class="carousel-subtitle">Bâtiments • Murs • Dalles béton</small></span>
+            <span>• Location bennes <small class="carousel-subtitle">3 à 30 m³ • Chargement inclus</small></span>
+          </h2>
+
+          <div class="carousel">
+            <div class="carousel-inner">
+              <img src="./images/toutseul1.jpg" alt="Chantier GD.SERVICE">
+              <img src="./images/toutseul2.jpg" alt="Terrassement en cours">
+              <img src="./images/toutseul3.jpg" alt="Benne et travaux">
+            </div>
+            <div class="carousel-dots">
+              <span class="dot active" data-slide="0"></span>
+              <span class="dot" data-slide="1"></span>
+              <span class="dot" data-slide="2"></span>
+            </div>
+          </div>
+
+          <div class="hero-features">
+            <div><span>Intervention 7/7 jours</span></div>
+            <div><span>Devis gratuit</span></div>
+            <div><span>50 km autour de Juranville</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- MODAL CONTACT -->
+  <div id="contactModal" class="modal">
+    <div class="modal-content">
+      <span class="close">×</span>
+      <h2>Contactez-nous</h2>
+      <form>
+        <label>Nom :</label>
+        <input type="text" placeholder="Votre nom" required>
+        <label>Email :</label>
+        <input type="email" placeholder="Votre email" required>
+        <label>Message :</label>
+        <textarea placeholder="Votre message..." required></textarea>
+        <button type="submit" id="sendMessage" class="btn">
+  <span class="btn-text">Envoyer le message</span>
+  <span class="success-text" style="display:none;">
+    Envoyé avec succès !
+  </span>
+</button>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 GD.SERVICE - Tous droits réservés | Tel : 06.44.26.96.78</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
