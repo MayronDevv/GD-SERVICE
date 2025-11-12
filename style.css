@@ -557,54 +557,185 @@ nav a.current::after {
 }
 .ba-dot.active, .ba-dot:hover { background: var(--orange); transform: scale(1.3); }
 
-/* Modal & Footer */
+/* ========= MODAL CONTACT - VERSION ULTRA SEXY 2025 ========= */
 .modal {
   display: none;
   position: fixed;
   z-index: 2000;
   left: 0; top: 0;
   width: 100%; height: 100%;
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(0,0,0,0.92);
+  backdrop-filter: blur(8px);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.modal.active {
+  opacity: 1;
 }
 
 .modal-content {
-  background-color: #1a1a1a;
-  margin: 10% auto;
-  padding: 30px;
-  border-radius: 15px;
+  background: linear-gradient(135deg, #111 0%, #1a1a1a 100%);
+  margin: 0 20px;
+  padding: 40px 35px;
+  border-radius: 20px;
   width: 90%;
-  max-width: 400px;
+  max-width: 440px;
   color: var(--blanc);
-  animation: popIn .4s ease;
+  text-align: center;
+  box-shadow: 
+    0 0 40px rgba(244,124,31,0.4),
+    0 0 80px rgba(244,124,31,0.2),
+    inset 0 0 30px rgba(244,124,31,0.1);
+  border: 1.5px solid var(--orange);
+  position: relative;
+  animation: modalPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.2);
+  overflow: hidden;
 }
 
-@keyframes popIn {
-  from { transform: scale(.7); opacity: 0; }
-  to   { transform: scale(1); opacity: 1; }
+.modal-content::before {
+  content: '';
+  position: absolute;
+  top: -2px; left: -2px; right: -2px; bottom: -2px;
+  background: linear-gradient(45deg, var(--orange), #ff9a3d, var(--orange), #d45a00);
+  border-radius: 20px;
+  z-index: -1;
+  opacity: 0.6;
+  animation: rotate 8s linear infinite;
+}
+
+.modal-content h2 {
+  font-size: 2.2rem;
+  color: var(--orange);
+  margin-bottom: 12px;
+  text-shadow: 0 0 20px rgba(244,124,31,0.6);
+}
+
+.modal-content p {
+  color: var(--gris);
+  margin-bottom: 25px;
+  font-size: 1rem;
 }
 
 .modal-content input,
 .modal-content textarea {
   width: 100%;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  background-color: #333;
+  margin: 12px 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  border: 1px solid rgba(244,124,31,0.3);
+  background: rgba(255,255,255,0.06);
   color: var(--blanc);
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
 }
 
-.modal-content textarea { height: 100px; resize: none; }
+.modal-content input:focus,
+.modal-content textarea:focus {
+  outline: none;
+  border-color: var(--orange);
+  box-shadow: 0 0 20px rgba(244,124,31,0.4);
+  background: rgba(255,255,255,0.1);
+}
 
-.close { float: right; font-size: 24px; cursor: pointer; }
-.close:hover { color: var(--orange); }
+.modal-content textarea {
+  height: 120px;
+  resize: none;
+}
 
+.modal-content button,
+.modal-content .btn {
+  background: var(--orange);
+  color: white;
+  padding: 16px 40px;
+  border: none;
+  border-radius: 50px;
+  font-weight: bold;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin-top: 15px;
+  transition: all 0.4s ease;
+  box-shadow: 0 8px 25px rgba(244,124,31,0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.modal-content button:hover,
+.modal-content .btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 15px 35px rgba(244,124,31,0.6);
+  background: #ff8c2a;
+}
+
+.modal-content button::before {
+  content: '';
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 0; height: 0;
+  background: rgba(255,255,255,0.3);
+  border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.modal-content button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+.close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  font-size: 32px;
+  color: var(--gris);
+  cursor: pointer;
+  transition: 0.3s;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.05);
+}
+
+.close:hover {
+  color: var(--orange);
+  background: rgba(244,124,31,0.2);
+  transform: rotate(90deg);
+}
+
+/* ========= FOOTER PARFAITEMENT CENTRÉ - 2025 EDITION ========= */
 footer {
   background: rgba(0,0,0,.9);
   color: var(--gris);
   text-align: center;
-  padding: 20px;
-  font-size: .9rem;
+  padding: 30px 20px;
+  font-size: .95rem;
+  position: relative;
+  width: 100%;
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(244,124,31,0.2);
+}
+
+/* Le texte à l'intérieur bien centré verticalement et horizontalement */
+footer p {
+  margin: 0;
+  line-height: 1.5;
+}
+
+@keyframes modalPop {
+  0%   { transform: scale(0.6) translateY(100px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+@keyframes rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 
 /* ====================================
