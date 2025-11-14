@@ -126,6 +126,17 @@
       <input type="email" placeholder="Votre email" required>
       <label>Message :</label>
       <textarea placeholder="Votre message..." required></textarea>
+      <!-- DANS #contactModal .modal-content -->
+      <div class="contact-alternative">
+        <p style="margin: 20px 0 10px; font-size: 0.95rem; color: var(--gris);">
+          Ou contactez-nous directement au :
+        </p>
+        <p style="font-size: 1.3rem; font-weight: bold; color: var(--orange); margin: 0;">
+          <a href="tel:0644269678" style="color: var(--orange); text-decoration: none;">
+            06 44 26 96 78
+          </a>
+        </p>
+      </div>
 
       <!-- BOUTON CENTRÉ DANS UN CONTENEUR -->
       <div class="button-container">
@@ -141,9 +152,91 @@
 </div>
 
   <footer>
-    <p>© 2025 GD.SERVICE - Tous droits réservés | Tel : 06.44.26.96.78</p>
+    <p>© 2025 GD.SERVICE - Tous droits réservés<br>
+      <a href="#" id="openPrivacyPolicy" style="color: var(--orange); text-decoration: underline;">Politique de confidentialité</a>
+      | Tel : 06.44.26.96.78</p>
   </footer>
 
   <script src="script.js"></script>
+
+  <!-- POPUP RGPD -->
+<div id="rgpdModal" class="rgpd-modal">
+  <div class="rgpd-content">
+    <div class="rgpd-icon">Cookies</div>
+    <h3>Respect de votre vie privée</h3>
+   <p>
+  En envoyant ce formulaire, vous acceptez que vos données (nom, email, message)<br>
+  soient utilisées <strong>uniquement pour vous répondre</strong>.<br><br>
+  <strong>Elles ne seront jamais vendues, partagées ou utilisées à des fins commerciales.</strong><br>
+  Vous pouvez demander leur suppression à tout moment (RGPD).
+</p>
+    <div class="rgpd-buttons">
+      <button id="acceptRgpd" class="btn-rgpd accept">J'accepte</button>
+      <button id="refuseRgpd" class="btn-rgpd refuse">Refuser</button>
+    </div>
+  </div>
+</div>
+<!-- POPUP REFUS RGPD -->
+<div id="refuseModal" class="rgpd-modal">
+  <div class="rgpd-content">
+    <div class="rgpd-icon">Attention</div>
+    <p>
+  Vous avez refusé le traitement de vos données personnelles.<br><br>
+  <strong>Pour envoyer un message, vous devez accepter.</strong><br>
+  Nous utilisons uniquement vos données pour vous répondre.<br>
+  <strong>Elles ne seront jamais vendues ni transmises à des tiers.</strong>
+</p>
+    <div class="rgpd-buttons">
+      <button id="reopenRgpd" class="btn-rgpd accept">Revenir & accepter</button>
+      <button id="closeRefuse" class="btn-rgpd refuse">Fermer</button>
+    </div>
+  </div>
+</div>
+<!-- POPUP POLITIQUE DE CONFIDENTIALITÉ -->
+<div id="privacyModal" class="rgpd-modal">
+  <div class="rgpd-content" style="max-height: 80vh; overflow-y: auto; padding-right: 10px;">
+    <div class="rgpd-icon">Document</div>
+    <h3>Politique de Confidentialité</h3>
+    <div style="text-align: left; font-size: 0.9rem; line-height: 1.7; color: var(--gris);">
+      <p><strong>Dernière mise à jour : 14 novembre 2025</strong></p>
+
+      <h4>1. Collecte des données</h4>
+      <p>
+        Nous collectons uniquement les données que vous nous fournissez via le formulaire de contact :
+        <strong>nom, adresse email, message</strong>.
+      </p>
+
+      <h4>2. Utilisation des données</h4>
+      <p>
+        Ces données sont utilisées <strong>exclusivement pour vous répondre</strong>.<br>
+        <strong>Aucune donnée n’est vendue, partagée ou utilisée à des fins commerciales.</strong>
+      </p>
+
+      <h4>3. Durée de conservation</h4>
+      <p>
+        Vos données sont supprimées dès que la conversation est terminée (max. 30 jours).
+      </p>
+
+      <h4>4. Vos droits (RGPD)</h4>
+      <p>
+        Vous pouvez à tout moment :<br>
+        • Demander l’accès à vos données<br>
+        • Demander leur suppression<br>
+        • Vous opposer au traitement
+      </p>
+      <p>Contact : <a href="mailto:contact@gd-service.fr" style="color: var(--orange);">contact@gd-service.fr</a></p>
+
+      <h4>5. Cookies</h4>
+      <p>
+        Un cookie technique (<code>rgpd_accepted</code>) est utilisé pour mémoriser votre choix.<br>
+        Durée : 1 an. Aucun tracking.
+      </p>
+    </div>
+
+    <div class="rgpd-buttons" style="margin-top: 20px;">
+      <button id="closePrivacy" class="btn-rgpd accept">Fermer</button>
+    </div>
+  </div>
+</div>
 </body>
 </html>

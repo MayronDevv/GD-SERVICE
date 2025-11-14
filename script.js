@@ -256,4 +256,141 @@ function resetForm() {
   successText.textContent = '';
   clearErrors();
 }
+// === VARIABLES ===
+const rgpdModal     = document.getElementById('rgpdModal');
+const refuseModal   = document.getElementById('refuseModal');
+const acceptBtn     = document.getElementById('acceptRgpd');
+const refuseBtn     = document.getElementById('refuseRgpd');
+const reopenBtn     = document.getElementById('reopenRgpd');
+const closeRefuse   = document.getElementById('closeRefuse');
+
+// === FONCTION SÉCURISÉE ===
+function isRgpdAccepted() {
+  const cookies = document.cookie.split(';');
+  for (let cookie of cookies) {
+    const [name, value] = cookie.trim().split('=');
+    if (name === 'rgpd_accepted' && value === 'true') {
+      console.log('Cookie RGPD : ACCEPTÉ');
+      return true;
+    }
+  }
+  console.log('Cookie RGPD : REFUSÉ ou absent');
+  return false;
+}
+
+// === AU CHARGEMENT ===
+if (!isRgpdAccepted()) {
+  rgpdModal.classList.add('active');
+  sendBtn.disabled = false; // on s'assure que le bouton est réactif
+}
+
+// === BOUTONS RGPD ===
+acceptBtn.addEventListener('click', () => {
+  document.cookie = "rgpd_accepted=true; max-age=31536000; path=/; Secure; SameSite=Strict";
+  rgpdModal.classList.remove('active');
+  refuseModal.classList.remove('active');
+  sendBtn.disabled = false; // réactive le bouton
+  console.log('RGPD accepté → bouton réactivé');
+});
+
+refuseBtn.addEventListener('click', () => {
+  rgpdModal.classList.remove('active');
+  refuseModal.classList.add('active');
+  sendBtn.disabled = false;
+});
+
+reopenBtn.addEventListener('click', () => {
+  refuseModal.classList.remove('active');
+  rgpdModal.classList.add('active');
+});
+
+closeRefuse.addEventListener('click', () => {
+  refuseModal.classList.remove('active');
+});
+
+// === ENVOI : BLOCAGE TOTAL ===
+sendBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  console.log('Clic sur Envoyer');
+
+  // RÉACTIVE LE BOUTON AU DÉBUT
+  sendBtn.disabled = false;
+
+  // VÉRIFIE LE COOKIE
+  if (!isRgpdAccepted()) {
+    console.warn('ENVOI BLOQUÉ : RGPD non accepté');
+    rgpdModal.classList.add('active');
+    return;
+  }
+
+  console.log('RGPD accepté → validation');
+
+  // === VALIDATION ===
+  clearErrors();
+  const name = nameInput.value.trim();
+  const email = emailInput.value.trim();
+  const message = messageInput.value.trim();
+
+  let hasError = false;
+  if (!name) { showError(nameInput, 'Le nom est requis.'); hasError = true; }
+  if (!email || !isValidEmail(email)) { showError(emailInput, 'Email invalide.'); hasError = true; }
+  if (!message || message.length <= 10) { showError(messageInput, 'Message trop court.'); hasError = true; }
+
+  if (hasError) {
+    sendBtn.disabled = false;
+    return;
+  }
+
+  // === ENVOI ===
+  sendBtn.disabled = true;
+  btnText.style.opacity = '0';
+
+  const loader = document.createElement('span');
+  loader.className = 'btn-loader';
+  loader.innerHTML = `<svg width="20" height="20" viewBox="0 0 38 38" stroke="#fff">
+    <g fill="none" fill-rule="evenodd">
+      <g transform="translate(1 1)" stroke-width="2">
+        <circle stroke-opacity=".5" cx="18" cy="18" r="18"/>
+        <path d="M36 18c0-9.94-8.06-18-18-18">
+          <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="1s" repeatCount="indefinite"/>
+        </path>
+      </g>
+    </g>
+  </svg>`;
+  sendBtn.appendChild(loader);
+
+  setTimeout(() => {
+    loader.remove();
+    sendBtn.classList.add('success');
+    successText.style.opacity = '1';
+
+    setTimeout(() => {
+      modal.classList.remove('active');
+      setTimeout(() => {
+        modal.style.display = 'none';
+        resetForm();
+      }, 500);
+    }, 2000);
+  }, 1500);
+});
+// === POPUP POLITIQUE DE CONFIDENTIALITÉ ===
+const privacyModal = document.getElementById('privacyModal');
+const openPrivacyBtn = document.getElementById('openPrivacyPolicy');
+const closePrivacyBtn = document.getElementById('closePrivacy');
+
+openPrivacyBtn.addEventListener('click', (e) => {
+  e.preventDefault();
+  privacyModal.classList.add('active');
+});
+
+closePrivacyBtn.addEventListener('click', () => {
+  privacyModal.classList.remove('active');
+});
+
+// Fermer en cliquant dehors
+privacyModal.addEventListener('click', (e) => {
+  if (e.target === privacyModal) {
+    privacyModal.classList.remove('active');
+  }
+});
 });
